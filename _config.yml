@@ -1,0 +1,45 @@
+title: Taco Ops
+logo: null
+description: Taco Ops – Thing bad? I make good.
+baseurl: ''
+url: 'https://taco-ops.github.io'
+author:
+  name: David Perez
+  avatar: /images/15.jpg
+hero:
+  title: David Perez
+  description: DevOps, SRE and Tacos.
+  image: /images/tacocat.jpg
+contact:
+  email: david.perez@tacoops.io
+  description: Looking for a tech partner who prioritizes pragmatism over theatrics? Let's craft something solid, together.
+social:
+  - icon: ion-logo-instagram
+    link: https://instagram.co
+  - icon: ion-logo-github
+    link: https://github.com
+disqus-identifier: anvodstudio-demo
+google-analytics: null
+mailchimp: enable
+mailchimp-identifier: null
+markdown: kramdown
+permalink: pretty
+plugins:
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll/tagging
+paginate: 8
+paginate_path: /page/:num
+defaults:
+  - scope:
+      path: _pages
+    values:
+      permalink: /:basename:output_ext
+include:
+  - _pages
+tag_page_dir: tag
+tag_page_layout: tag_page
+tag_permalink_style: pretty
+sass:
+  sass_dir: _sass
+  style: compressed
