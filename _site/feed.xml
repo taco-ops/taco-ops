@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Taco Ops</title>
+    <description>Taco Ops – Thing bad? I make good.</description>
+    <link>http://0.0.0.0:4000/</link>
+    <atom:link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Thu, 04 Apr 2024 00:15:17 +0000</pubDate>
+    <lastBuildDate>Thu, 04 Apr 2024 00:15:17 +0000</lastBuildDate>
+    <generator>Jekyll v4.3.2</generator>
+    
+      <item>
+        <title>The land of broken toys</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;To laugh at yourself is to love yourself.&lt;/p&gt;
+
+  &lt;p&gt;&lt;cite&gt;Mickey Mouse&lt;/cite&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;After all my years in the industry, I’ve experienced the wide gamut of cultures offered by the ever changing landscape of technology. From burgeoning startups to established giants, my tech journey has exposed me to many&lt;/p&gt;
+</description>
+        <pubDate>Wed, 20 Dec 2023 15:05:55 +0000</pubDate>
+        <link>http://0.0.0.0:4000/2023/12/20/The-land-of-broken-toys/</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/2023/12/20/The-land-of-broken-toys/</guid>
+        
+        <category>Work</category>
+        
+        <category>Industry</category>
+        
+        <category>Culture</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>TIL about using envsubt with nFPM</title>
+        <description>&lt;h1 id=&quot;makefiles-make-me-crazy&quot;&gt;Makefiles make me crazy.&lt;/h1&gt;
+
+&lt;p&gt;How many &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.PHONY&lt;/code&gt; entries in a single Makefile is too many? I don’t know but I do know that creating a Makefile, let alone maintaining them amongst several people, is never something I look forward to.&lt;/p&gt;
+
+&lt;p&gt;After searching for alternatives a bit this last year I stumbled upon &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nFPM&lt;/code&gt;. &lt;a href=&quot;https://nfpm.goreleaser.com/&quot;&gt;NFPM&lt;/a&gt; is a simple, 0-dependencies, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;deb&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rpm&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;apk&lt;/code&gt;, and Arch Linux packager. It does not support all of the same formats as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fpm&lt;/code&gt; but for my use case, it was a perfect fit.&lt;/p&gt;
+
+&lt;p&gt;We can use YAML to write a &lt;a href=&quot;https://nfpm.goreleaser.com/configuration/&quot;&gt;specification config file&lt;/a&gt; that the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nFPM&lt;/code&gt; binary will use to create the final RPM package. Yay. Last I checked YAML was orders of magnitude easier to create and maintain than the alternatve.&lt;/p&gt;
+
+&lt;h1 id=&quot;nice-nothing-can-go-wrong&quot;&gt;Nice, nothing can go wrong!&lt;/h1&gt;
+
+&lt;p&gt;There is one downside to using nFPM: it does &lt;em&gt;not&lt;/em&gt; support templating out of the box. There are also no plans to support templating either. This causes issues when we want to generate a YAML configuration for an RPM package on the fly.&lt;/p&gt;
+
+&lt;p&gt;Why would we want to do that? Well, what if we have a pipeline that builds and packages a binary whenever a release is created? We’ll need to create an &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nfpm.yaml&lt;/code&gt; file (it can be called anything but nFPM looks for the nfpm.yaml file in the current, unless otherwise specified) that contains our config for the rpm package but the values will be hardcoded.&lt;/p&gt;
+
+&lt;p&gt;For example, this is what a config file might normally look like:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;My-Cool-Package&quot;&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;arch&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;amd64&quot;&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;platform&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;linux&quot;&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;1.0.0&quot;&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;maintainer&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;David&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Perez&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;lt;david.perez_at_tacoops.io&amp;gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;This is my cool package&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;license&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;BSD-3-Clause&quot;&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;rpm&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;summary&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;My&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Cool&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Package&quot;&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;contents&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;build/cool-package-contents/&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;dst&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/tmp/&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;All of our values are defined into our &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nfpm.yaml&lt;/code&gt; file. We then run the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nfpm&lt;/code&gt; binary to create the package like so:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;nfpm pkg &lt;span class=&quot;nt&quot;&gt;--packager&lt;/span&gt; rpm &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; nfpm.yaml&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;This will result in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;My-Cool-Package-1.0.0-1.x86_64.rpm&lt;/code&gt; file.&lt;/p&gt;
+
+&lt;p&gt;Sure, we could just bump version numbers and update anything else in the config file on next release but that process should be automated in some fashion in our pipeline.&lt;/p&gt;
+
+&lt;p&gt;Thoughts of using a heredoc to potentially generate configs on the fly entered my mind.&lt;/p&gt;
+
+&lt;h1 id=&quot;enter-envsubt-and-the-template-of-not-doom&quot;&gt;Enter envsubt and The Template of not Doom&lt;/h1&gt;
+&lt;p&gt;The nFPM author &lt;em&gt;does&lt;/em&gt; suggest using a tool like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;envsubt&lt;/code&gt; as an ad-hoc templating tool. The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;envsubt&lt;/code&gt; program substitutes the values of environment variables. In normal operation mode, standard input is copied to standard output, with references to environment variables of the form $VARIABLE or ${VARIABLE} being replaced with the corresponding values.&lt;/p&gt;
+
+&lt;p&gt;What that means is we can replace any instance of a variable in a file with the value of an environment variable.&lt;/p&gt;
+
+&lt;p&gt;For example:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;cat &lt;/span&gt;name.template
+ Name: &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;NAME&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;NAME&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;David Perez&quot;&lt;/span&gt;
+
+envsubt &amp;lt; name.template &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; name.yaml
+
+&lt;span class=&quot;nb&quot;&gt;cat &lt;/span&gt;my_name.yaml
+ Name: &lt;span class=&quot;s2&quot;&gt;&quot;David Perez&quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;A new YAML file is generated and the content of ${NAME} gets replaced with the env var value.&lt;/p&gt;
+
+&lt;h1 id=&quot;yay-us&quot;&gt;YAY Us&lt;/h1&gt;
+
+&lt;p&gt;With that in mind, we can create a YAML template file that looks something like this:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;${NAME}&quot;&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;arch&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;${ARCH}&quot;&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;platform&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;${PLATFORM}&quot;&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;${VERSION}&quot;&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;maintainer&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;${MAINTAINER}&quot;&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;This is my cool package&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;license&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;${LICENSE}&quot;&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;rpm&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;summary&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;My&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Cool&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Package&quot;&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;contents&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;${SRC}&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;dst&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;${DST}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;We can populate/inject the necessary information we need to update our template file into environment variables during CI pipeline job runtime. This way we get the latest information we are looking to update our packaging config without having someone manually adjust them.&lt;/p&gt;
+
+&lt;p&gt;Example Gitlab-CI job:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span class=&quot;na&quot;&gt;.rpm-packaging&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;stage&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Packaging&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;rockylinux:8&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# copy repo config for goreleaser and install onto runner as well as envsubst&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# in case it is not already&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;cp -v goreleaser.repo /etc/yum.repos.d/&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;yum install -y nfpm gettext&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# we source a .env file to inject our environment variables&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# generated in an earlier build job&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;source .env&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# envsubt will replace all shell variables entries in nfpm.template&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# with the values we sourced from the .env file&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# This will allow us to create a custom nfpm.yaml script that will&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# contain the updated information for the new release&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;envsubst &amp;lt; nfpm.template &amp;gt; nfpm.yaml&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# Create RPM using nfpm.yaml config and store it in RPM directory&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;nfpm pkg --packager rpm -f nfpm.yaml --target RPM/&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# Get basic RPM information from generated file.&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;find RPM -type f -name &quot;*.rpm&quot; -exec rpm -qip {} \;&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;find RPM -type f -name &quot;*.rpm&quot; -exec rpm -qlp {} \;&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;my-cool-job&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;extends&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;.rpm-packaging&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;before_script&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|&lt;/span&gt;
+      &lt;span class=&quot;s&quot;&gt;if [[ -n &quot;$DOTENV_CONTENTS&quot; ]]; then&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;echo &quot;$DOTENV_CONTENTS&quot; &amp;gt; .env&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;echo &quot;Created .env file&quot;&lt;/span&gt;
+      &lt;span class=&quot;s&quot;&gt;fi&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;tags&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;my-cool-runner&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h1 id=&quot;gotchas-and-things-to-consider&quot;&gt;Gotchas and things to consider&lt;/h1&gt;
+
+&lt;p&gt;You may have noticed there is a source/destination entry in the nfpm.yaml config above.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span class=&quot;na&quot;&gt;contents&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;build/cool-package-contents/&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;dst&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/tmp/&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;src&lt;/code&gt; tells nFPM where to find the artifacts we wish to package and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dst&lt;/code&gt; indicates where on the filesystem the RPM should land when installed. This works well when there is a predetermined path that is uniform across all machines it may be installed on. Truth is, there may be use cases where we need to instaall this in the current users home directory.&lt;/p&gt;
+
+&lt;p&gt;The main problem is we cannot know ahead of time which user is going to install the RPM package, so we have no way to substitute the src:dst variables at runtmie. nFPM also does not support using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;${HOME}&lt;/code&gt; environment variable in the YAML config file.&lt;/p&gt;
+
+&lt;h1 id=&quot;post-install-scripts-to-the-rescue&quot;&gt;Post-install scripts to the rescue&lt;/h1&gt;
+
+&lt;p&gt;According to the Fedora Project, we can leverage scriptlets to handle more complex logic before, during and after RPM installation. You can read more about it &lt;a href=&quot;https://docs.fedoraproject.org/en-US/packaging-guidelines/Scriptlets/&quot;&gt;here&lt;/a&gt;. I decided to try and use the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;%post&lt;/code&gt; scriptlet method to do some transformation after installing the RPM.&lt;/p&gt;
+
+&lt;p&gt;Here was my thought process:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;We can hard code the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dst&lt;/code&gt; path for the artifact to be &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/tmp/artifact&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;During installation, the RPMM is installed in that location.&lt;/li&gt;
+  &lt;li&gt;Before RPM installation is complete, the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;%post&lt;/code&gt; scriplet is used to run a bash script that handles the logic for finding a users home directory and copying it there.&lt;/li&gt;
+  &lt;li&gt;RPM is copied to users home directory and RPM installation completes.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Thankfully, nFPM exposes the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;postinstall&lt;/code&gt; attribute via the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;scripts&lt;/code&gt; method, where we can then poinnt nFPM to our bash script to include and run during installation process.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span class=&quot;na&quot;&gt;contents&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;build/cool-package-contents/&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;dst&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/tmp/&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;scripts&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;postinstall&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;post-install.bash&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;The contents of which could contain some logic similar to this:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Redirect both stdout and stderr to a log file&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;exec&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;tee&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt; /tmp/copy-artifact.log&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 2&amp;gt;&amp;amp;1
+
+&lt;span class=&quot;c&quot;&gt;# Set source and destination directories&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;source_dir&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/tmp/artifact&quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;dest_dir&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$HOME&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Check if the source directory exists&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$source_dir&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt;
+   &lt;span class=&quot;c&quot;&gt;# Attempt to copy the directory&lt;/span&gt;
+   &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Copying directory &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$source_dir&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; to &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$dest_dir&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;...&quot;&lt;/span&gt;
+   &lt;span class=&quot;nb&quot;&gt;cp&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$source_dir&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$dest_dir&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+   &lt;span class=&quot;nb&quot;&gt;rm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-rf&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$source_dir&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+
+   &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$?&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-eq&lt;/span&gt; 0 &lt;span class=&quot;o&quot;&gt;]]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then
+       &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Directory copied successfully.&quot;&lt;/span&gt;
+   &lt;span class=&quot;k&quot;&gt;else
+       &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Error copying directory.&quot;&lt;/span&gt;
+   &lt;span class=&quot;k&quot;&gt;fi
+else
+   &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Directory &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$source_dir&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; not found.&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;fi&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h1 id=&quot;anyways&quot;&gt;Anyways&lt;/h1&gt;
+
+&lt;p&gt;That’s how I used envsubt with nFPM. When I presented it to my teammates, they were all pretty stoked at not having to deal with Makefiles in our pipelines any longer.&lt;/p&gt;
+</description>
+        <pubDate>Wed, 20 Dec 2023 15:05:55 +0000</pubDate>
+        <link>http://0.0.0.0:4000/2023/12/20/TIL-using-envsubt-and-nfpm/</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/2023/12/20/TIL-using-envsubt-and-nfpm/</guid>
+        
+        <category>TIL</category>
+        
+        <category>DevOps</category>
+        
+        <category>NFPM</category>
+        
+        <category>Packaging</category>
+        
+        <category>Templating</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>This isnt where I parked my car</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;Wherever you go, there you are.&lt;/p&gt;
+
+  &lt;p&gt;&lt;cite&gt;No clue who said this but its true&lt;/cite&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&quot;howdy&quot;&gt;Howdy&lt;/h1&gt;
+
+&lt;p&gt;Sometimes I write. Sometimes it’s tech stuff, DevOps/SRE stuff, tech culture stuff, astrophotography stuff (random) and sometimes taco stuff.&lt;/p&gt;
+
+&lt;h1 id=&quot;why-tacos&quot;&gt;Why Tacos?&lt;/h1&gt;
+
+&lt;p&gt;First, why not?&lt;/p&gt;
+
+&lt;p&gt;Second, I was once the de-facto Taco Subject Matter Expert at a tech company in downtown Austin, TX. While I was not responsible for the giant “SEND TACOS” sign we had plastered on the windows facing 6th street, I did convince someone from Razorfish that I made the sign and that prompted them to send our teamm over $100 worth of breakfast tacos one morning.&lt;/p&gt;
+
+&lt;h2 id=&quot;thus-the-taco-sme-was-born&quot;&gt;&lt;em&gt;THUS THE TACO SME WAS BORN&lt;/em&gt;&lt;/h2&gt;
+
+&lt;h1 id=&quot;but-how-does-this-qualify-you-to-be-a-taco-sme&quot;&gt;But how does this qualify you to be a Taco SME?&lt;/h1&gt;
+
+&lt;p&gt;It doesn’t but check this out: &lt;em&gt;pulls out fresh stack of tortillas&lt;/em&gt;&lt;/p&gt;
+</description>
+        <pubDate>Wed, 20 Dec 2023 15:05:55 +0000</pubDate>
+        <link>http://0.0.0.0:4000/2023/12/20/This-isnt-where-I-parked-my-car/</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/2023/12/20/This-isnt-where-I-parked-my-car/</guid>
+        
+        <category>Life Update</category>
+        
+        <category>DevOps</category>
+        
+        
+      </item>
+    
+  </channel>
+</rss>
