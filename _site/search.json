@@ -1,16 +1,6 @@
 [
   
     {
-      "title"    : "The land of broken toys",
-      "category" : "",
-      "tags"     : "Work, Industry, and Culture",
-      "url"      : "/2023/12/20/The-land-of-broken-toys/",
-      "date"     : "Dec 20, 2023",
-      "content"  : "  To laugh at yourself is to love yourself.  Mickey MouseAfter all my years in the industry, I’ve experienced the wide gamut of cultures offered by the ever changing landscape of technology. From burgeoning startups to established giants, my tech journey has exposed me to many",
-      "article"  : "<div class='article col col-4 col-d-6 col-t-12 grid__post animate'> <div class='article__inner'><a class='article__image' href='/2023/12/20/The-land-of-broken-toys/'> <img src='/images/mickey.png' alt='The land of broken toys'> </a><div class='article__content'> <div class='article__meta'> <span class='article__minutes'>1 min read <time class='article__date' datetime='2023-12-20T15:05:55+00:00'>Dec 20, 2023</time> </span> </div><h2 class='article__title'>The land of broken toys</h2> <p class='article__excerpt'>intro</p><div class='article__bottom'><div class='article__author'> <a href='/about/' aria-label='David Perez'><img class='article__author-image' src='/images/15.jpg' alt='David Perez's Picture'></a> </div><div class='article__bottom-meta'><a href='/about/' class='article__author-link'>David Perez</a><span> in </span> <span class='article-tags'> <a href='/tag/Work' class='article__tag'>Work</a>  <a href='/tag/Industry' class='article__tag'>Industry</a>  <a href='/tag/Culture' class='article__tag'>Culture</a> </span></div></div></div></div></div>"
-    } ,
-  
-    {
       "title"    : "TIL about using envsubt with nFPM",
       "category" : "",
       "tags"     : "TIL, DevOps, NFPM, Packaging, and Templating",

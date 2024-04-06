@@ -5,32 +5,9 @@
     <description>Taco Ops – Thing bad? I make good.</description>
     <link>http://0.0.0.0:4000/</link>
     <atom:link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 04 Apr 2024 00:15:17 +0000</pubDate>
-    <lastBuildDate>Thu, 04 Apr 2024 00:15:17 +0000</lastBuildDate>
+    <pubDate>Sat, 06 Apr 2024 02:36:16 +0000</pubDate>
+    <lastBuildDate>Sat, 06 Apr 2024 02:36:16 +0000</lastBuildDate>
     <generator>Jekyll v4.3.2</generator>
-    
-      <item>
-        <title>The land of broken toys</title>
-        <description>&lt;blockquote&gt;
-  &lt;p&gt;To laugh at yourself is to love yourself.&lt;/p&gt;
-
-  &lt;p&gt;&lt;cite&gt;Mickey Mouse&lt;/cite&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;After all my years in the industry, I’ve experienced the wide gamut of cultures offered by the ever changing landscape of technology. From burgeoning startups to established giants, my tech journey has exposed me to many&lt;/p&gt;
-</description>
-        <pubDate>Wed, 20 Dec 2023 15:05:55 +0000</pubDate>
-        <link>http://0.0.0.0:4000/2023/12/20/The-land-of-broken-toys/</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/2023/12/20/The-land-of-broken-toys/</guid>
-        
-        <category>Work</category>
-        
-        <category>Industry</category>
-        
-        <category>Culture</category>
-        
-        
-      </item>
     
       <item>
         <title>TIL about using envsubt with nFPM</title>
