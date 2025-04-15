@@ -4,7 +4,7 @@ Hi, I'm a passionate developer and DevOps enthusiast with a love for blending te
 
 ## About Me 👨‍💻
 
-I’m a software engineer with a diverse background in automation, system design, and cloud-native development. My journey in tech began with a curiosity for solving problems and quickly evolved into a passion for building systems that make real-life operations smoother and more enjoyable. Whether I’m deploying a robust CI/CD pipeline or experimenting with a new project idea, I always strive to merge practicality with a touch of fun. 🚀
+I’m a DevOps/Platform/Infrastructre/Software engineer with a diverse background in automation, system design, and cloud-native development. My journey in tech began with a curiosity for solving problems and quickly evolved into a passion for building systems that make real-life operations smoother and more enjoyable. Whether I’m deploying a robust CI/CD pipeline or experimenting with a new project idea, I always strive to merge practicality with a touch of fun. 🚀
 
 ## What I Do 🔧
 
@@ -14,14 +14,11 @@ I’m a software engineer with a diverse background in automation, system design
 
 ## Skills 🛠️
 
-- **Programming 💻:** JavaScript, Python, and Go are at the core of my development toolkit.
+- **Programming 💻:** Bash, Python, and Go are at the core of my development toolkit.
 - **DevOps Tools ⚙️:** Expertise with Docker, Kubernetes, and CI/CD pipelines.
-- **Cloud Platforms ☁️:** Proficient in AWS, Azure, and Google Cloud.
+- **Cloud Platforms ☁️:** Proficient in AWS and Google Cloud.
 - **Systems & Automation 🤖:** Deep knowledge in building and maintaining scalable, automated systems.
 
-## Projects I Love ❤️
-
-- **Taco-Ops 🌮:** A fun and innovative project that marries the art of taco making with efficient operations. Taco-Ops is all about automating workflows in a playful yet effective way.
 
 ## Get in Touch 📬
 
