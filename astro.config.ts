@@ -20,7 +20,8 @@ const {
 
 // https://astro.build/config
 const config = defineConfig({
-  site: 'https://tacoops.io',
+  site: 'https://taco-ops.github.io',
+  base: '/taco-ops',
   output: 'static',
   integrations: [
     expressiveCode({
