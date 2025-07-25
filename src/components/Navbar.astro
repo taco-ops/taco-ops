@@ -3,16 +3,17 @@ import Icon from "./Icon.astro";
 import { name } from 'spectre:globals';
 
 const path = Astro.url.pathname;
+const base = import.meta.env.BASE_URL;
 ---
 <nav>
-  <a class="site-title" href="/">{name}</a>
+  <a class="site-title" href="/taco-ops/">{name}</a>
   <ul>
     <li>
-      <a href="/blog" class:list={{ active: path.startsWith('/blog') }}>Blog</a>
+      <a href="/taco-ops/blog" class:list={{ active: path.startsWith('/blog') }}>Blog</a>
     </li>
     <li class="nav-separator">/</li>
     <li>
-      <a href="/projects" class:list={{ active: path.startsWith('/projects') }}>Projects</a>
+      <a href="/taco-ops/projects" class:list={{ active: path.startsWith('/projects') }}>Projects</a>
     </li>
     <li class="nav-separator">/</li>
     <li>
