@@ -1,9 +1,23 @@
 [
   {
     "id": 1,
-    "duration": "2024 - present",
-    "company": "Astro Community",
-    "title": "Astro Theme",
-    "description": "Existing as an Astro theme for anyone to use."
+    "duration": "2022 - 2024",
+    "company": "The Walt Disney Studios",
+    "title": "Senior Site Reliability Engineer",
+    "description": "Capturing the beauty of distant galaxies, nebulae, and stellar formations. Combining technical precision with artistic vision to reveal the hidden wonders of our universe."
+  },
+  {
+    "id": 2,
+    "duration": "2024 - 2025",
+    "company": "Fox Robotics",
+    "title": "Senior Robotic Infrastructure Engineer",
+    "description": "Built CI/CD pipelines and deployment automation for distributed systems. Implemented monitoring and alerting solutions that provided unprecedented visibility into system performance."
+  },
+  {
+    "id": 3,
+    "duration": "2025 - present",
+    "company": "Silicon Labs",
+    "title": "Senior DevOps Engineer",
+    "description": "Architecting cloud-native systems that scale to astronomical proportions. Specializing in Kubernetes orchestration, observability platforms, and GPU infrastructure automation across multi-cloud environments."
   }
 ]

@@ -1,5 +1,26 @@
 [
   {
     "id": "guide"
+  },
+  {
+    "id": "devops"
+  },
+  {
+    "id": "philosophy"
+  },
+  {
+    "id": "cosmos"
+  },
+  {
+    "id": "astrophotography"
+  },
+  {
+    "id": "kubernetes"
+  },
+  {
+    "id": "automation"
+  },
+  {
+    "id": "monitoring"
   }
 ]

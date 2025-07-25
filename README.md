@@ -1,42 +1,10 @@
-![Spectre, a terminal-inspired theme for Astro.](./images/README.png)
+# whoami
+Howdy! My name is David Perez.
 
-Spectre is a terminal-inspired theme for Astro, built using TypeScript and Astro.
+My focus is on platform engineering and DevOps: Kubernetes clusters designed to recover from failure, pipelines that validate and deploy with confidence, and observability stacks that help us understand what’s really happening inside our infrastructure. I work with tools like GKE, EKS, k3s, Terraform, and Ansible. Prometheus, Thanos, Loki, and Grafana are the instruments I use to monitor the health and behavior of the systems I help design.
 
-## Getting Started
+More recently, I’ve been working at the edges of AI and automation. I’ve built Python pipelines that process real-world image data, applying machine learning to problems like computer vision and astrophotography. One of my favorite projects involved removing satellites from deep-sky images, revealing galaxies as they appeared before we ever reached orbit.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/louisescher/spectre/tree/main)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/louisescher/spectre/tree/main)
+What matters most to me is alignment between people, systems, and the purpose behind the work. Infrastructure isn’t just a set of tools. It’s a language we use to collaborate, to trust, and to build things that last.
 
-Alternatively, you can create a new Astro project with Spectre like this:
-
-```bash
-# npm
-npm create astro@latest -- --template louisescher/spectre
-
-# pnpm
-pnpm create astro@latest --template louisescher/spectre
-
-# yarn
-yarn create astro --template louisescher/spectre
-```
-
-## Features
-
-- 100 / 100 Lighthouse performance
-- Responsive for all screen sizes
-- Fully accessible
-- Type-Safe
-- Auto-generated sitemap
-- Markdown / MDX Support
-- Builds on content collections
-- Search powered by [pagefind](https://pagefind.app)
-- Comments powered by [giscus](https://giscus.app) (can be turned off)
-- More!
-
-## Curious?
-
-Head over to [the preview page](https://spectre.lou.gg) to find out more!
-
-### Spectre Integration
-
-If you want to know more about how the custom integration that is used in the `astro.config.ts` file works, head over to the [integration's own README](https://github.com/louisescher/spectre/tree/master/package)!
+The systems we design reflect the questions we’re trying to answer. I try to ask thoughtful ones, build with care, and leave behind tools that quietly support others in doing the same.

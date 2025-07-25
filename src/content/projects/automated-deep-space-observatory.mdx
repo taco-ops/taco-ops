@@ -1,0 +1,64 @@
+---
+title: Siril-MCP - Giving Thought to Starlight
+date: 07-22-2025
+description: An AI enhanced approach to astrophotography using automated telescopes, real-time processing pipelines, and celestial event orchestration with MCP.
+image: ../assets/cosmonaut.png
+info:
+  - text: GitHub Repository
+    link: https://github.com/tacoops/deep-space-observatory
+    icon:
+      type: lucide
+      name: github
+  - text: Live Dashboard
+    link: https://observatory.tacoops.io
+    icon:
+      type: lucide
+      name: telescope
+  - text: Tech Stack
+    link: https://tacoops.io/projects/automated-deep-space-observatory#tech-stack
+    icon:
+      type: lucide
+      name: layers
+---
+
+In every FITS file captured by the Seestar S50 telescope, there is a story of photons that have traveled for tens of millions of years, passing through dust and silence, arriving at a lens on Earth in the briefest moment of cosmic time. These are ancient messages, and now we have the tools not only to observe them but to interpret, refine, and understand them.
+
+But even the most beautiful light must pass through process.
+
+# 🛠 The Architecture of Reflection
+The siril-mcp project is an ongoing experiment in giving intelligent structure to starlight. At its core, it connects a large language model (LLM) with the CLI of Siril, the powerful open-source tool for astronomical image processing.
+
+The goal is simple: to allow a model to reason about and automate a series of well understood astrophotography tasks, using FITS data collected by the Seestar S50 telescope.
+
+But like all good systems, siril-mcp begins with structure.
+
+The tool first validates the layout of an astrophotography project. It checks whether the files are organized according to the expectations of Siril and the preprocessing scripts provided by the astrophotography community. In this case, the excellent work of @naztronomy, whose scripts guide Siril through calibration, registration, stacking, and stretching.
+
+Where human effort once parsed through directories, renamed files, or manually queued up stacking operations, the model can now understand and execute intent provided it has the right tools, guardrails, and context.
+
+# 💡 A Dialogue Between Machine and Sky
+The choice to use an LLM isn’t about novelty. It’s about dialogue. We are now in an era where models can begin to understand the why behind a pipeline, not just the what. They can check whether the calibration frames are in place. They can decide which script to run. They can suggest alternatives.
+
+This is not intelligence in the romantic sense but it is useful cognition. A system that doesn’t just execute, but interprets. One that can adapt to new folders, new targets, new mistakes. One that turns a collection of images into a signal of intent, and then translates that intent into processing steps.
+
+Like the telescope itself, siril-mcp is just an instrument. But it is one that listens.
+
+# 🌀 Toward a Quiet Kind of Automation
+What draws me to this work isn’t just the convenience. It’s the feeling that the process itself can be elegant. That we can build tools that understand the shape of the data and respond to it without overwhelming noise.
+
+The light in these images is real. It touched supernovae, passed through hydrogen clouds, scattered across interstellar ice. To treat that light with care to remove noise without erasing meaning, to stretch without distortion is to honor where it came from.
+
+And in some small way, to remember where we came from too.
+
+# 🌌 Next Steps
+siril-mcp is still early. The roadmap includes:
+
+- Structured prompts and memory for different processing goals (galaxies, nebulae, wide-field)
+
+- More robust validation of FITS metadata and frame type separation
+
+- Fine-grained control over siril CLI execution and output interpretation
+
+- A feedback loop between the LLM and Siril logs for adaptive processing
+
+In time, I hope it will serve not just as a tool for astrophotographers, but as a model for thoughtful automation—where machine learning augments curiosity, and infrastructure serves wonder.

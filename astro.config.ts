@@ -6,9 +6,6 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import spectre from './package/src';
 
-import node from '@astrojs/node';
-import { spectreDark } from './src/ec-theme';
-
 const {
   GISCUS_REPO,
   GISCUS_REPO_ID,
@@ -23,45 +20,33 @@ const {
 
 // https://astro.build/config
 const config = defineConfig({
-  site: 'https://spectre.louisescher.dev',
+  site: 'https://taco-ops.github.io',
+  base: '/taco-ops',
   output: 'static',
   integrations: [
     expressiveCode({
-      themes: [spectreDark],
+      themes: ['material-theme-palenight'],
     }),
     mdx(),
     sitemap(),
     spectre({
-      name: 'Spectre',
+      name: 'Taco Ops',
+      themeColor: '#84ffff',
       openGraph: {
         home: {
-          title: 'Spectre',
-          description: 'A minimalistic theme for Astro.'
+          title: 'Taco Ops',
+          description: 'Exploring the cosmos through DevOps and Astrophotography. A cosmic blend of technical precision and celestial wonder.'
         },
         blog: {
           title: 'Blog',
-          description: 'News and guides for Spectre.'
+          description: 'Cosmic musings on DevOps, Astrophotography, and the universe beyond.'
         },
         projects: {
           title: 'Projects'
         }
       },
-      giscus: {
-        repository: GISCUS_REPO,
-        repositoryId: GISCUS_REPO_ID,
-        category: GISCUS_CATEGORY,
-        categoryId: GISCUS_CATEGORY_ID,
-        mapping: GISCUS_MAPPING as any,
-        strict: GISCUS_STRICT === "true",
-        reactionsEnabled: GISCUS_REACTIONS_ENABLED === "true",
-        emitMetadata: GISCUS_EMIT_METADATA === "true",
-        lang: GISCUS_LANG,
-      }
     })
-  ],
-  adapter: node({
-    mode: 'standalone'
-  })
+  ]
 });
 
 export default config;

@@ -3,17 +3,24 @@
     "id": 1,
     "icon": {
       "type": "lucide",
-      "name": "cake"
+      "name": "telescope"
     },
-    "text": "1 year old"
+    "text": "Star Gazer"
   },
   {
     "id": 2,
     "icon": {
       "type": "lucide",
+      "name": "server"
+    },
+    "text": "Cloud Orchestrator"
+  },
+  {
+    "id": 3,
+    "icon": {
+      "type": "lucide",
       "name": "earth"
     },
-    "type": "lucide",
-    "text": "Made in Germany"
+    "text": "Exploring the Cosmos from Silicon to Starlight"
   }
 ]
