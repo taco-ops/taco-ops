@@ -33,7 +33,7 @@ const projects = await getCollection('projects');
 			</div>
 			<div class="content-container">
 				{projects.sort((a, b) => b.data.date.getTime() - a.data.date.getTime()).map((post) => (
-					<a href={`/projects/${post.id}`} class="post-container">
+					<a href={`/taco-ops/projects/${post.id}`} class="post-container">
 						<div class="post-header">
 							<h3>{post.data.title}</h3>
 							<span class="post-date">{post.data.date.toLocaleDateString()}</span>

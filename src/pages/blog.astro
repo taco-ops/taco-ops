@@ -23,7 +23,7 @@ const tags = posts.flatMap((post) => post.data.tags.map((tag) => tag.id));
           <li>
             <a
               class="blog-tag"
-              href="/blog"
+              href="/taco-ops/blog"
               data-tag={tag}
             >
               {tag}
@@ -41,7 +41,7 @@ const tags = posts.flatMap((post) => post.data.tags.map((tag) => tag.id));
 			</div>
 			<div class="content-container">
 				{posts.sort((a, b) => b.data.createdAt.getTime() - a.data.createdAt.getTime()).map((post) => (
-					<a href={`/blog/${post.id}`} class="post-container" data-tags={post.data.tags.map((tag) => tag.id).join(",")}>
+					<a href={`/taco-ops/blog/${post.id}`} class="post-container" data-tags={post.data.tags.map((tag) => tag.id).join(",")}>
 						<div class="post-header">
 							<h3>{post.data.title}</h3>
 							<span class="post-date">{post.data.createdAt.toLocaleDateString()}</span>
