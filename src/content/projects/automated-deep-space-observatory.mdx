@@ -1,25 +1,81 @@
 ---
 title: Siril-MCP - Giving Thought to Starlight
 date: 07-22-2025
-description: An AI enhanced approach to astrophotography using automated telescopes, real-time processing pipelines, and celestial event orchestration with MCP.
+description: A Model Context Protocol server that bridges AI models with Siril astronomical image processing for intelligent astrophotography workflows.
 image: ../assets/cosmonaut.png
 info:
   - text: GitHub Repository
-    link: https://github.com/tacoops/deep-space-observatory
+    link: https://github.com/taco-ops/siril-mcp
     icon:
       type: lucide
       name: github
-  - text: Live Dashboard
-    link: https://observatory.tacoops.io
-    icon:
-      type: lucide
-      name: telescope
-  - text: Tech Stack
-    link: https://tacoops.io/projects/automated-deep-space-observatory#tech-stack
-    icon:
-      type: lucide
-      name: layers
 ---
+
+In every FITS file captured by the Seestar S50 telescope, there is a story of photons that have traveled for tens of millions of years, passing through dust and silence, arriving at a lens on Earth in the briefest moment of cosmic time. These ancient messages deserve more than manual processing—they deserve thoughtful automation.
+
+But even the most beautiful light must pass through process.
+
+# 🛠 The Architecture of Connection
+The siril-mcp project is a Model Context Protocol (MCP) server that creates a bridge between AI models and Siril, the powerful open-source astronomical image processing software. Rather than replacing human expertise, it amplifies it—allowing models to understand, validate, and execute the well-established workflows that turn raw telescope data into cosmic art.
+
+At its core, siril-mcp provides a structured interface for AI models to:
+- Detect and validate Siril installations across platforms
+- Check project structure and file organization  
+- Process Seestar S30/S50 telescope mosaics with appropriate filter settings
+- Download and manage the latest processing scripts from the astrophotography community
+- Execute calibration, registration, stacking, and stretching workflows
+
+But like all good systems, siril-mcp begins with structure.
+
+The server automatically validates project layouts, checking that light frames, calibration data, and output directories are organized according to Siril's expectations. It leverages the excellent SSF scripts from @naztronomy, which guide Siril through the complete processing pipeline—from raw FITS files to polished astronomical images.
+
+Where human effort once involved manual downloads, file organization, and script execution, the model can now understand project intent and execute the appropriate workflow with proper guardrails and validation.
+
+# 💡 A Protocol for Understanding
+The choice to build this as an MCP server isn't about novelty—it's about creating a proper interface between human intent and machine execution. Through the Model Context Protocol, AI models can now:
+
+**Understand Context**: Check what files are present, validate project structure, and determine the appropriate processing workflow based on filter types (broadband vs narrowband).
+
+**Execute with Precision**: Run Siril processing scripts with the correct parameters, handling both UV/IR block filters and light pollution filters appropriately.
+
+**Adapt to Environment**: Automatically detect Siril installations across macOS, Linux, and Windows systems, whether installed as applications or from package managers.
+
+**Maintain Quality**: Validate each step of the process, from binary detection to final mosaic output, with comprehensive error handling and logging.
+
+This isn't about replacing the astrophotographer's eye or intuition. It's about handling the repetitive, error-prone parts of the workflow so human attention can focus on the art and science of capturing the cosmos.
+
+# 🌀 From Intent to Image
+What draws me to this work is the elegance of the abstraction. An AI model can now say "process this Seestar project with broadband settings" and the MCP server handles:
+
+- Validating the Siril installation and version
+- Checking that the project directory contains the expected light frames
+- Creating the appropriate SSF processing scripts automatically
+- Executing the full calibration → registration → stacking → stretching pipeline
+- Ensuring output directories are created and organized properly
+
+The light in these images is real—it touched supernovae, passed through hydrogen clouds, scattered across interstellar ice. The processing pipeline should honor that journey with consistency, precision, and care.
+
+# 🌌 Current Capabilities
+siril-mcp is actively developed with these working features:
+
+**✅ Smart Detection**: Automatic Siril binary detection across platforms with fallback strategies
+**✅ Version Management**: Check installed Siril versions and compatibility  
+**✅ Project Validation**: Analyze project structure and identify missing components
+**✅ Mosaic Processing**: Full Seestar S30/S50 telescope image processing pipeline
+**✅ Filter Intelligence**: Supports both broadband (UV/IR) and narrowband (LP) workflows
+**✅ Script Automation**: Auto-creates required SSF scripts from the naztronomy repository
+**✅ MCP Protocol**: Full Model Context Protocol compliance with proper async handling
+
+**🔄 In Development**: GUI integration for headless preprocessing, PyPI packaging, and extended telescope support
+
+The project includes comprehensive testing—both Python unit tests and MCP integration tests—ensuring every tool works correctly and the protocol implementation is robust.
+
+# 🚀 A Foundation for Wonder
+siril-mcp serves as more than just a processing tool. It's a model for how we can build thoughtful automation in specialized domains—where machine learning augments human expertise rather than replacing it.
+
+The next time an AI model helps process a galaxy captured by a backyard telescope, there's a quiet satisfaction in knowing the pipeline respects both the ancient light and the modern craft of those who seek to capture it.
+
+In time, I hope this approach will inspire similar bridges between AI and other technical disciplines—always in service of human curiosity, always preserving the wonder at the heart of discovery.
 
 In every FITS file captured by the Seestar S50 telescope, there is a story of photons that have traveled for tens of millions of years, passing through dust and silence, arriving at a lens on Earth in the briefest moment of cosmic time. These are ancient messages, and now we have the tools not only to observe them but to interpret, refine, and understand them.
 
