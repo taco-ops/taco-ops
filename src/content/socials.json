@@ -7,14 +7,5 @@
     },
     "text": "GitHub",
     "link": "https://github.com/taco-ops"
-  },
-  {
-    "id": 2,
-    "icon": {
-      "type": "lucide",
-      "name": "globe"
-    },
-    "text": "Website",
-    "link": "https://tacoops.io"
   }
 ]
