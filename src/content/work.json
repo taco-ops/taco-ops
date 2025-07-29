@@ -4,14 +4,14 @@
     "duration": "2022 - 2024",
     "company": "The Walt Disney Studios",
     "title": "Senior Site Reliability Engineer",
-    "description": "Embedded with Marvel's post-production teams, I architected highly available systems that rendered the impossible into reality. Built secure release pipelines for Marvel's Render Farm, reducing deployment times by 95% through observability with Datadog and refined SLO practices. Collaborated with Disney Research Studios on shared ML/AI infrastructure, creating the foundation for cutting-edge VFX tools that bring cosmic battles and otherworldly realms to life."
+    "description": "Embedded with Marvel's post-production teams, architecting highly available systems that rendered the impossible into reality. Built secure release pipelines for Marvel's Render Farm, reducing deployment times by 95%. Collaborated on shared AI/ML infrastructure supporting cutting-edge VFX workflows."
   },
   {
     "id": 2,
     "duration": "2024 - 2025",
     "company": "Fox Robotics",
     "title": "Senior Robotic Infrastructure Engineer",
-    "description": "Designed observability platforms that gave voice to 100+ IoT edge devices scattered across warehouses like constellation points. Built a monitoring system using GKE, Prometheus, Thanos, and Grafana Cloud to collect the telemetry of autonomous systems. Developed Python exporters to capture the pulse of SIM cards and network health from OpenWRT-based field modems. Created GPU-enabled GitLab runners for ML model training, bridging the gap between human intention and robotic precision."
+    "description": "Designed observability platforms giving voice to 100+ IoT edge devices scattered like constellation points. Built monitoring systems using GKE, Prometheus, and Thanos to collect telemetry from autonomous warehouse systems."
   },
   {
     "id": 3,

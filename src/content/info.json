@@ -5,7 +5,7 @@
       "type": "lucide",
       "name": "telescope"
     },
-    "text": "Star Gazer"
+    "text": "Seeker of Starlight"
   },
   {
     "id": 2,
@@ -13,14 +13,14 @@
       "type": "lucide",
       "name": "server"
     },
-    "text": "Cloud Orchestrator"
+    "text": "Architect of the Cloud"
   },
   {
     "id": 3,
     "icon": {
       "type": "lucide",
-      "name": "earth"
+      "name": "gauge"
     },
-    "text": "Exploring the Cosmos from Silicon to Starlight"
+    "text": "Observer amidst the Signal & Noise"
   }
 ]
