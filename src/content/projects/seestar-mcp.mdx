@@ -1,0 +1,108 @@
+---
+title: Seestar-MCP - When Starlight Meets Intelligence
+date: 08-14-2025
+description: A Model Context Protocol server that bridges AI models with the ZWO Seestar telescope, enabling natural language control of deep space observations and imaging workflows.
+image: ../assets/seestar-mcp.png
+info:
+  - text: GitHub Repository
+    link: https://github.com/taco-ops/seestar-mcp
+    icon:
+      type: lucide
+      name: github
+  - text: Docker Container
+    link: https://github.com/taco-ops/seestar-mcp/pkgs/container/seestar-mcp
+    icon:
+      type: lucide
+      name: package
+  - text: Public Beta
+    icon:
+      type: lucide
+      name: flask-conical
+---
+
+As AI has become more integrated into my workflow, I found myself wanting to extend that capability to telescope control. Instead of manually using the seestar app on my phone, I wanted to simply tell an AI model "point to the Andromeda Galaxy" and have it handle the technical details.
+
+Seestar-MCP (public beta) is a Model Context Protocol server that enables natural language control of ZWO Seestar telescopes through AI assistants like Claude Desktop.
+
+# 🛠 Technical Implementation
+The challenge was building a reliable interface between AI models and telescope hardware. The Seestar telescope requires specific protocol handling and coordinate precision that manual control doesn't typically demand.
+
+ZWO does not publish its internal API or communication protocols, so I had to reverse-engineer communication protocols by monitoring network traffic with Wireshark and analyzing the JSON-RPC messages exchanged between the Seestar app and the telescope. This process involved capturing UDP and TCP packets during various operations, then reconstructing the protocol flow to understand how commands were structured and how responses were formatted.
+
+Seestar-MCP implements the complete Seestar communication protocol through the Model Context Protocol, providing AI models with structured access to telescope functions. Instead of replacing astronomical knowledge, it handles the mechanical aspects of telescope control.
+
+The core functionality includes:
+- **Target Resolution**: Coordinate lookup from astronomical catalogs (SIMBAD, NED, Astropy)  
+- **Visibility Calculations**: Geographic location awareness with horizon checking and solar safety
+- **Imaging Control**: Standard and 2x2 mosaic imaging with real-time progress monitoring
+- **Hardware Management**: Direct focuser and filter wheel control
+- **Protocol Implementation**: Complete UDP+TCP communication with proper connection handling
+
+The technical challenge centered on the Seestar's dual-protocol system. The telescope requires UDP initialization on port 4720, followed by TCP control on port 4700 using JSON-RPC 2.0 messaging. Getting this handshake sequence correct and maintaining stable connections required reverse-engineering the protocol and extensive testing with actual hardware.
+
+Where manual telescope control requires switching between multiple applications and manual coordinate entry, the MCP server consolidates these operations into a single interface that AI models can access through natural language commands.
+
+# 💡 MCP Integration Benefits
+Building this as an MCP server provides several advantages for AI-telescope integration. The Model Context Protocol creates a standardized interface that allows AI models to:
+
+**Access Complex Calculations**: Questions like "Is Saturn visible right now?" involve geographic coordinates, UTC time conversion, orbital mechanics, and horizon elevation calculations that happen transparently.
+
+**Implement Safety Protocols**: Solar safety checking prevents equipment damage from accidental sun observations, while emergency stop functionality provides immediate control.
+
+**Handle Network Variability**: Automatic telescope discovery manages IP address changes and connection failures in home network environments.
+
+**Provide Real-time Feedback**: Status monitoring gives AI models current information about imaging progress, calibration states, and system health for better decision-making.
+
+The goal is reducing the friction between observational intent and telescope execution, while maintaining the precision that astronomical work requires.
+
+# 🌀 Practical Example
+A typical workflow demonstrates the abstraction layer in action. When an AI model receives the command:
+
+"Start a 2x2 mosaic of the Orion Nebula with 5-minute exposures in each panel"
+
+The MCP server executes this sequence:
+- Queries multiple astronomical catalogs for M42's precise coordinates
+- Calculates the four panel positions with appropriate overlap
+- Verifies Orion is above the horizon from the observer's location  
+- Configures filter wheel settings based on target type
+- Manages telescope slewing, plate solving, and centering for each panel
+- Monitors imaging progress and handles connection issues
+
+This transforms natural language into precise telescope control while handling the technical complexity behind the scenes. The AI model can focus on observational goals rather than coordinate systems and protocol details.
+
+# 🌌 Current Capabilities
+Seestar-MCP is in public beta with these working features:
+
+- **✅ Complete Protocol Stack** - UDP+TCP implementation with robust connection handling and error recovery
+- **✅ Natural Language Targeting** - Multi-catalog object resolution with coordinate precision to 6 decimal places  
+- **✅ Geographic Intelligence** - Location-aware horizon checking with timezone and safety calculations
+- **✅ Advanced Imaging** - Standard and mosaic imaging with auto-centering and progress monitoring
+- **✅ Hardware Control** - Direct focuser, filter wheel, and telescope arm management
+- **✅ Claude Desktop Ready** - Pre-configured MCP integration with comprehensive documentation
+- **✅ Docker Deployment** - Complete containerization with health checks and environment configuration
+
+- **🔄 In Beta Testing** - Gathering user feedback on stability, extended mosaic patterns, and integration workflows
+
+The project includes comprehensive testing with both Python unit tests and JavaScript MCP integration tests to ensure protocol compliance and operational reliability. Beta testing focuses on real-world usage patterns and edge cases that laboratory testing can't cover.
+
+# 🚀 Beta Testing Phase
+Seestar-MCP represents a practical application of AI-hardware integration in the astrophotography domain. The beta phase is focused on validating the core functionality and gathering feedback on usability.
+
+Key areas for beta testing include:
+- Protocol reliability across different network configurations
+- AI model integration patterns and command interpretation
+- Edge case handling in real observing conditions
+- User workflow optimization and documentation clarity
+
+The beta release includes Docker containerization, comprehensive documentation, and pre-configured Claude Desktop integration to lower the barrier to testing and adoption.
+
+# 🌌 Development Roadmap
+Planned improvements focus on expanding functionality and improving reliability:
+
+- Extended mosaic patterns beyond 2x2 configurations with custom grid support
+- Weather monitoring integration for automated session planning  
+- Enhanced calibration workflows to reduce dependency on the Seestar app
+- Community-driven target databases and observing session templates
+- Additional astronomical software integration through extended MCP tools
+
+The core architecture supports these extensions through modular design and comprehensive error handling. Future development will be guided by beta user feedback and real-world usage patterns.
