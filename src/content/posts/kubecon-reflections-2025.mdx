@@ -1,0 +1,110 @@
+---
+title: "Kubecon Reflections 2025"
+createdAt: 2025-12-09
+description: "Reflections from KubeCon North America 2025: Kubernetes Meets the AI Era"
+tags: 
+  - kubecon
+  - kubernetes
+  - ai
+draft: false
+image: "../assets/kubecon-2025.jpg"
+---
+
+# Reflections from KubeCon North America 2025: Kubernetes and the New Machinery of Thought
+
+I travelled to Atlanta with a co-worker for KubeCon this year, and found myself among the faithful of cloud native enthusiasm. As someone who has long relied on Kubernetes for production workloads, and now increasingly for the great carnival of GenAI, the schedule read like a banquet menu for the terminally curious.
+
+In the span of only a few years, artificial intelligence has transformed itself from a glorified trivia assistant into something resembling a tireless junior colleague, one capable of monitoring observability dashboards, fretting over SLOs, adjusting scaling knobs, and enforcing policy with the prim confidence of a civil servant. We have, in short, created little bureaucrats of silicon.
+
+Yet amid all this futurism, Kubernetes remains what it has always been, a beautifully declarative dream beating its head against the granite of real-world resource contention. Workloads, networks, and storage bicker incessantly for their slice of the pie, reminding us that the laws of physics still have voting rights.
+
+---
+
+## AIOps at Scale: Salesforce and the March Toward Automated Stewardship
+
+One of the early talks concerned AIOps. Salesforce, in its infinite zest for operating many thousands of clusters, has taken to constructing what are essentially thinking sentinels. These systems examine cluster health with the clinical detachment of a Victorian physician and intervene within carefully defined guardrails.
+
+It was a glimpse at a future in which Kubernetes may well administer itself with only occasional human supervision, much like a cat that tolerates your presence but does not require it.
+
+**Link to talk:**  
+https://events.linuxfoundation.org/kubecon-cloudnativecon-north-america/program/schedule/
+
+---
+
+## The Internal AI Platform Journey: Hinge and the Folly of Building for Imaginary Users
+
+The next talk, from an engineer at Hinge, was a quiet masterpiece in the anthropology of technological misadventure. Their internal ML platform had evolved through several phases.
+
+- **Phase 0: The DIY Epoch**  
+  ML engineers built their own infrastructure because no one else had bothered.
+
+- **Phase 1: The Great Assumption**  
+  Platform engineers, in a fit of benevolent imperial thinking, built a system they believed the MLEs would adore.
+
+- **Phase 2: The Humbling**  
+  The MLEs did not adore it, nor even mildly prefer it, necessitating a full reconstruction into HAI Serve, a platform that actually reflects user needs and is powered by Kubernetes, ArgoCD, MLFlow, Helm, and other familiar tools.
+
+### Lessons, Delivered with Suitable Gravity
+
+- **Turn customers into partners.**  
+  Platforms built in a vacuum often belong in one.
+
+- **Sit with users and ask where it hurts.**  
+  You may be surprised to learn that the pain is not where you assumed.
+
+- **Solve your actual problems first. Solve theoretical ones only if boredom sets in.**
+
+- **The AI and ML landscape moves like a caffeinated cheetah. Evaluate continuously.**
+
+- **Trust is earned by solving real problems, not by PowerPoint enthusiasm.**
+
+**Link to presentation:**  
+https://static.sched.com/hosted_files/kccncna2025/65/Kubecon%202025%20(1).pdf
+
+---
+
+## The GPU Shortage: A Problem Familiar to Anyone Who Has Ever Wanted Something Expensive
+
+As model sizes swell and fine-tuning becomes an Olympic sport, GPUs have become as scarce as sincerity in political advertising. Cloud providers ration them with monk-like austerity, and on-prem operators eye their remaining cards with the tenderness of rare gemstones.
+
+Into this crisis steps a clever idea: **multi-node distributed inference on Kubernetes**. Rather than insisting on one monstrous GPU to rule them all, workloads are sharded across several more modest devices. Think of it as asking the entire village to lift the piano instead of one forlorn mover.
+
+**Link:**  
+https://static.sched.com/hosted_files/kccncna2025/0b/AI%20Models%20Are%20Huge%2C%20but%20Your%20GPUs%20Aren%E2%80%99t_%20Mastering%20Multi-Node%20Distributed%20Inference%20on%20Kubernetes.pptx.pdf
+
+---
+
+## GPU Cold Starts: The Great Patience Test
+
+Another talk centered on GPU cold starts. If you have ever waited for a GPU container to initialize, you will know that cold starts are not so much delays as they are opportunities for introspection.
+
+A GPU cold start occurs when a workload awakens with no model cached, no warmed runtime, and no memory of previous labor. Time to first token becomes an ordeal, worsened by enormous image sizes, heavy initialization, and I/O pathways that move with the briskness of parliamentary procedure.
+
+### Remedies Proposed By Those Wiser Than I
+
+- Keep warm pools of GPU enabled VMs or containers. Think of them as hot water taps for your cluster.  
+- Avoid scaling to zero unless you enjoy suspense.  
+- Maintain a small reserve of warm capacity for bursty traffic.  
+
+**Link:**  
+https://static.sched.com/hosted_files/kccncna2025/47/gpu-cold-starts-presentation.pdf
+
+---
+
+## KubeVirt and High-Performance Workloads: A Marriage of Pragmatism and Progress
+
+The last GPU focused session examined high performance AI workloads running atop KubeVirt with NVIDIA GPU enabled VMs. It made a persuasive argument that Kubernetes is no longer merely a custodian of containers. It is increasingly the governor of all workloads, even those that retain their affection for the VM lifestyle.
+
+I also attended the Proxmox VM on Kubernetes Day event at the Atlanta Aquarium. The session included an informal census of attendees planning to flee VMware. Every hand in the room ascended with near religious conviction. The Aquarium fish looked on with quiet judgment.
+
+The message was unmistakable. Kubernetes is becoming the universal substrate for compute, a place where both containers and VMs can coexist under the same indifferent scheduler.
+
+---
+
+# Final Takeaway: Kubernetes and AI in 2025, An Unholy Yet Promising Alliance
+
+KubeCon 2025 revealed a truth that is becoming increasingly difficult to ignore. Kubernetes has not only survived the rise of AI, it has become the soil from which much of the AI ecosystem now grows. Multi-node inference, intelligent autoscaling, warm GPU pools, KubeVirt driven VM orchestration, and sprawling AIOps systems all point to one conclusion.
+
+The future of Kubernetes will not be defined by the management of containers, but by the management of intelligence itself. The clusters of tomorrow will diagnose their own ailments, negotiate their own resources, and perhaps even pity us for ever having done the work manually.
+
+We are watching Kubernetes evolve from an operations platform into the operating system of distributed AI, a control plane governing not only workloads but the thinking machinery that tends them. Whether this inspires awe or existential dread is, as always, a matter of taste.
