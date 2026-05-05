@@ -5,7 +5,7 @@
       "type": "lucide",
       "name": "telescope"
     },
-    "text": "Seeker of Starlight"
+    "text": "Collector of Uncooperative Photons"
   },
   {
     "id": 2,
@@ -13,7 +13,7 @@
       "type": "lucide",
       "name": "server"
     },
-    "text": "Architect of the Cloud"
+    "text": "Keeper of Clusters"
   },
   {
     "id": 3,
@@ -21,6 +21,6 @@
       "type": "lucide",
       "name": "gauge"
     },
-    "text": "Observer amidst the Signal & Noise"
+    "text": "Suspicious of Clean Dashboards"
   }
 ]
