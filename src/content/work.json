@@ -4,20 +4,20 @@
     "duration": "2022 - 2024",
     "company": "The Walt Disney Studios",
     "title": "Senior Site Reliability Engineer",
-    "description": "Embedded with Marvel's post-production teams, architecting highly available systems that rendered the impossible into reality. Built secure release pipelines for Marvel's Render Farm, reducing deployment times by 95%. Collaborated on shared AI/ML infrastructure supporting cutting-edge VFX workflows."
+    "description": "Embedded with Marvel post-production teams, building highly available systems for render workloads where delay had a budget and everyone knew it. Built secure release pipelines for Marvel's Render Farm, reducing deployment times by 95%. Collaborated on shared AI/ML infrastructure for VFX workflows."
   },
   {
     "id": 2,
     "duration": "2024 - 2025",
     "company": "Fox Robotics",
     "title": "Senior Robotic Infrastructure Engineer",
-    "description": "Designed observability platforms giving voice to 100+ IoT edge devices scattered like constellation points. Built monitoring systems using GKE, Prometheus, and Thanos to collect telemetry from autonomous warehouse systems."
+    "description": "Designed observability platforms for 100+ autonomous edge devices, because robots are remarkably poor at explaining themselves when left without telemetry. Built monitoring systems using GKE, Prometheus, and Thanos for warehouse robotics fleets."
   },
   {
     "id": 3,
     "duration": "2025 - present",
     "company": "Silicon Labs",
     "title": "Senior DevOps Engineer",
-    "description": "Architecting cloud-native systems that scale to astronomical proportions. Specializing in Kubernetes orchestration, observability platforms, and GPU infrastructure automation across multi-cloud environments."
+    "description": "Building cloud-native platforms across cloud and on-prem environments, with a current emphasis on Kubernetes, Nomad, observability, GPU infrastructure automation, and the quiet archaeology of CI/CD migration."
   }
 ]

@@ -35,11 +35,11 @@ const config = defineConfig({
       openGraph: {
         home: {
           title: 'Taco Ops',
-          description: 'Exploring the cosmos through DevOps and Astrophotography. A cosmic blend of technical precision and celestial wonder.'
+          description: 'Infrastructure, observability, Kubernetes, and astrophotography from someone who spends a great deal of time separating signal from noise.'
         },
         blog: {
           title: 'Blog',
-          description: 'Cosmic musings on DevOps, Astrophotography, and the universe beyond.'
+          description: 'Notes on Kubernetes, platform engineering, astrophotography, and the machinery people trust until it starts telling the truth.'
         },
         projects: {
           title: 'Projects'
