@@ -3,7 +3,7 @@
 [![GitHub](https://img.shields.io/badge/-GitHub-000000?style=flat&logo=github&logoColor=white)](https://github.com/taco-ops)
 [![Blog](https://img.shields.io/badge/-Portfolio-84ffff?style=flat&logo=astro&logoColor=black)](https://taco-ops.github.io/taco-ops)
 
-**Platform Engineer · Astrophotographer**
+**Platform Engineer · Astrophotographer · Patient Refiner of Faint Signals**
 
 ---
 

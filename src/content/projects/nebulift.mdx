@@ -1,7 +1,7 @@
 ---
-title: Nebulift - Lifting Signal From the Noise of Stars
+title: Nebulift - Sorting Signal From the Noise of Stars
 date: 09-18-2025
-description: An AI-powered astrophotography quality control system that automatically separates cosmic signal from terrestrial noise, using hybrid intelligence to curate the light that traveled millions of years to reach your telescope.
+description: A local-first CLI tool for FITS image quality assessment. Computer vision detects acquisition artifacts. An optional ResNet18 classifier handles the ambiguous cases.
 image: ../assets/nebulift.png
 info:
   - text: GitHub Repository
@@ -23,99 +23,73 @@ info:
       name: cpu
 ---
 
-After countless nights beneath the cosmos, capturing photons that have traveled for millennia, you return with hundreds of images. Some hold the pure signal of distant galaxies, others carry the noise of our terrestrial existence: satellite trails cutting across nebulae, clouds obscuring star fields, the brief bright streaks of aircraft passing overhead.
+After a clear night with a telescope, you return with hundreds of FITS files and the modest hope that a useful fraction survived. Some frames contain the target. Others contain clouds, satellite trails, tracking errors, and hot pixels. Separating them by hand is the kind of work that makes people abandon hobbies.
 
-The ancient light deserves better than being lost in manual sorting.
+Nebulift is a local CLI tool for FITS image quality assessment. Computer vision handles the obvious cases. An optional ResNet18 classifier, trained on your own data, handles the ones that aren't.
 
-Nebulift is an AI-powered quality assessment system that automatically distinguishes between the cosmic signal worth preserving and the terrestrial noise worth discarding. It combines traditional computer vision with ResNet18 deep learning to create an intelligent curator for your astrophotography sessions.
+# What It Does
 
-# 🛠 The Architecture of Separation
-
-The challenge wasn't just building another image classifier. It was creating a system that understands the difference between meaningful cosmic data and contamination—one that respects the journey each photon has taken to reach your sensor.
-
-Nebulift implements a four-component pipeline designed around this cosmic perspective:
-
-**FITS Processor**: Handles the native language of astronomical data, loading FITS files with their rich metadata and normalizing the raw photon counts into analyzable arrays. It understands exposure times, telescope coordinates, and the technical context that makes each image unique.
-
-**Computer Vision Pre-filter**: Uses traditional CV techniques to detect the obvious artifacts—linear streak detection through Hough transforms, cloud identification via texture analysis, saturation mapping, and hot pixel detection. These algorithms recognize the patterns that shouldn't exist in deep space.
-
-**ResNet18 Classifier**: A deep learning model trained to make the subtle distinctions that computer vision alone cannot—distinguishing between the faint wisps of actual nebulosity and high-altitude clouds, or recognizing when a bright streak is a satellite versus a cosmic ray hit.
-
-**Distributed Training**: Kubernetes-native architecture that scales from single-node processing on a Raspberry Pi 5 to full cluster deployments, because the universe is vast and so are the datasets we collect from it.
-
-# 💡 Intelligence in the Sorting
-
-The system's strength lies in its hybrid approach to intelligence. Rather than relying solely on machine learning, Nebulift combines the precision of traditional computer vision with the pattern recognition of neural networks.
-
-The computer vision algorithms handle the unambiguous cases: when a satellite streak cuts directly across your target, or when cloud coverage exceeds reasonable thresholds. These deterministic algorithms provide reliable, explainable decisions about obvious contamination.
-
-The ResNet18 model tackles the borderline cases where human-like judgment becomes essential. It learns to recognize when faint linear features might be background galaxies rather than satellites, or when subtle variations in brightness indicate natural cosmic structure rather than atmospheric interference.
-
-Together, they create a comprehensive analysis that sorts your images into three categories:
-- **Clean**: Pure cosmic signal, ready for stacking
-- **Contaminated**: Clear terrestrial interference, skip these
-- **Review**: Borderline cases requiring human judgment
-
-# 🌀 From Intent to Curation
-
-What draws me to this work is how it transforms the relationship between astrophotographer and data. Instead of spending hours manually reviewing thousands of images, you can focus on the artistry and science of capturing the cosmos.
-
-The workflow becomes elegant in its simplicity:
+The core workflow is a batch analysis command that processes a directory of FITS files and writes a JSON manifest:
 
 ```bash
-nebulift batch /path/to/raw/session /path/to/sorted/output
+uv run nebulift batch /path/to/raw/fits /path/to/output
 ```
 
-This single command analyzes every frame, applies both CV and ML assessment, and organizes your night's work into meaningful categories. The system processes FITS files natively, preserving all metadata and handling the technical complexities of astronomical data formats.
+By default that is report-only. Add `--action move` to sort files into class directories. Supply a trained model checkpoint with `--model` to layer ML classification on top of the CV pass.
 
-For those seeking deeper control, the training pipeline allows custom model development:
+Every frame gets one of three labels: `clean`, `contaminated`, or `review`. The CV pass produces a quality score based on streak detection (Hough transforms), cloud texture analysis, saturation mapping, and hot pixel counts. Scores above a configurable threshold are `clean`; scores below another threshold are `contaminated`; everything between goes to `review`.
+
+# The Full Workflow
+
+Batch analysis is the start. The real workflow is the loop that follows it.
+
+After a batch run, `nebulift review` opens each manifest entry in sequence and lets you correct labels in the terminal. It doesn't display image previews yet. What it does do is produce a reviewed manifest you can actually learn from.
 
 ```bash
-nebulift train-from-fits /path/to/telescope/sessions/ \
+uv run nebulift review /path/to/output/batch_manifest.json
+```
+
+From there:
+
+- `evaluate-manifest` compares your corrected labels against CV or model decisions and reports accuracy, a confusion matrix, and per-class F1.
+- `calibrate-thresholds` sweeps clean and contaminated score thresholds across one or more reviewed manifests to find the settings that maximize macro F1 on your actual data.
+- `export-curated` copies reviewed files into organized class directories for training.
+- `train-from-manifest` trains a ResNet18 model from those labels.
+- `register-model` stores the result in a local registry and optionally promotes it as the default, so subsequent `analyze` and `batch` runs use it automatically.
+
+The loop is: collect, review, calibrate, train, register, repeat. Each pass produces labeled data and a model better calibrated to your telescope and site conditions.
+
+# Training
+
+Two training paths exist. `train-from-fits` generates CV labels automatically from a raw FITS directory and trains on those:
+
+```bash
+uv run nebulift train-from-fits /path/to/fits/session \
     --model_output models/custom_classifier.pth \
-    --dataset_dir datasets/organized \
-    --clean_threshold 0.8
+    --dataset_dir datasets/session_training \
+    --epochs 50 \
+    --clean_threshold 0.7 \
+    --contaminated_threshold 0.3
 ```
 
-This approach uses computer vision analysis to generate training labels automatically, then trains a ResNet18 model on your specific telescope and imaging conditions. The system can adapt to different equipment, sites, and observing preferences.
+`train-from-manifest` trains from labels in a reviewed manifest, using `corrected_label` where present and falling back to `decision_label` otherwise. Add `--reviewed_only` to train only from explicitly reviewed entries.
 
-# 🌌 Current Capabilities
+No pretrained Nebulift model ships with the repository. The classifier is only useful once you've generated enough labeled data from your own sessions to train it.
 
-Nebulift currently operates in public beta with comprehensive functionality:
+# What Is and Isn't Ready
 
-**✅ Hybrid Intelligence**: Traditional CV algorithms combined with ResNet18 deep learning for superior accuracy
-**✅ FITS-Native Processing**: Built specifically for astronomical data with full metadata preservation  
-**✅ CPU-Optimized Inference**: Runs efficiently on resource-constrained hardware like Raspberry Pi 5
-**✅ Distributed Training**: PyTorch DistributedDataParallel with Kubernetes integration for cluster deployment
-**✅ Enterprise Infrastructure**: 67 tests with 89% coverage, comprehensive CI/CD, and multi-arch containers
-**✅ Comprehensive Analysis**: Streak detection, cloud analysis, saturation mapping, hot pixel identification
+The local FITS workflow is the primary supported path. That means: loading, CV analysis, batch sorting, interactive review, threshold calibration, curated export, and local training. That loop works.
 
-**🔄 Beta Testing Phase**: Seeking validation across different telescope configurations, imaging conditions, and workflow requirements from the astrophotography community.
+The Kubernetes, Argo CD, and distributed training resources are present in the repository but should be treated as scaffolding. Distributed training still needs real dataset mounting, model persistence validated end-to-end, and actual cluster storage. The `k8s/` and `argocd/` directories are useful for infrastructure iteration, not production deployment.
 
-# 🚀 Technical Implementation
+Raspberry Pi 5 is a design target for local inference. Real-world performance figures don't exist yet.
 
-The system demonstrates several architectural principles that extend beyond astrophotography:
+# The Practical Use Case
 
-**Modular Design**: Four independent components that can be deployed, scaled, and maintained separately while working together seamlessly.
+Every astrophotography session produces frames that should not go into the stacking pipeline. The question is how many hours you want to spend finding them. Nebulift reduces that work by doing the deterministic part automatically and making the uncertain part visible rather than hidden.
 
-**CPU-First Architecture**: Optimized algorithms and PyTorch quantization eliminate GPU requirements, making deployment accessible across diverse hardware environments.
-
-**Kubernetes-Native**: Full cluster integration with persistent storage, resource management, and horizontal scaling capabilities.
-
-**Intelligent Automation**: Rather than replacing human expertise, the system amplifies it—handling the repetitive classification work so humans can focus on the creative and scientific aspects.
-
-The beta implementation includes distributed training infrastructure that scales across Kubernetes clusters, comprehensive model persistence with versioning, and production-ready container deployment. Property-based testing with Hypothesis ensures robust error handling across edge cases.
-
-# 🌌 Beyond Classification
-
-This project represents more than automated image sorting. It embodies a philosophy about how we should interact with the data we collect from the universe.
-
-Every photon captured by your telescope has traveled vast distances and time to reach your sensor. Some carry the signature of stellar birth in distant nebulae, others the light of galaxy collisions that occurred when the universe was young. These signals deserve careful curation, not casual dismissal.
-
-Nebulift approaches this curation with both technical rigor and cosmic respect. It understands that what we're sorting isn't just data—it's the physical remnant of cosmic events, preserved in arrays of numbers that represent actual light from distant worlds.
-
-The system will continue evolving through community feedback, real-world validation, and the endless pursuit of better signal extraction from cosmic noise. Because in the end, we're not just sorting images. We're helping ensure that ancient light, having traveled so far to reach us, finds its way into the hands of those who will honor its journey with careful observation and wonder.
+The three-category output is the core design decision. Forcing a binary `keep/discard` on borderline frames produces confident wrong answers. Surfacing them explicitly for human review produces accurate stacks and labeled data for the next training run.
 
 ---
 
-*Nebulift is in public beta. The astrophotography community's feedback drives its development toward production readiness. Every clear night is an opportunity to test, refine, and improve our ability to lift signal from the noise of stars.*
+*The repository is at [github.com/taco-ops/nebulift](https://github.com/taco-ops/nebulift). Issues and dataset contributions are the most useful form of feedback.*
